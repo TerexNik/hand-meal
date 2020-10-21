@@ -3,6 +3,8 @@ package apiserver
 import (
 	"database/sql"
 	"github.com/TerexNik/hand-meal/internal/app/store/sqlstore"
+	"github.com/gorilla/sessions"
+	"github.com/sirupsen/logrus"
 	"net/http"
 )
 
@@ -13,7 +15,10 @@ func Start(config *Config) error {
 	}
 	defer db.Close()
 	store := sqlstore.New(db)
-	s := newServer(store)
+	sessionStore := sessions.NewCookieStore([]byte(config.SessionKey))
+	s := newServer(store, sessionStore)
+	logger := logrus.New()
+	logger.Info("server started on port: ", config.BindAddr)
 	return http.ListenAndServe(config.BindAddr, s)
 }
 

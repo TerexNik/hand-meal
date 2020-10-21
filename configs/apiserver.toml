@@ -1,3 +1,4 @@
 bind_addr = ":8080"
 log_level = "debug"
-database_url = "host=192.168.20.160 dbname=hand_meal user=postgres password=postgres sslmode=disable"
+database_url = "host=localhost dbname=hand_meal user=hand password=meal sslmode=disable"
+session_key="i1eRbIxLyUiwDek9Ibp0lSCxnP4c3et3gbvQf87tNwPXXMdbaD09As3H48VguqGGNOERCUib9ibP3ksRfo8xh2LC0e7Rs7wW"

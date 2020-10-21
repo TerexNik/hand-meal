@@ -1,0 +1,1 @@
+docker run --name database -d --rm -e POSTGRES_DB="hand_meal" -e POSTGRES_USER="hand" -e POSTGRES_PASSWORD="meal" -p 5432:5432 postgres:13.0-alpine

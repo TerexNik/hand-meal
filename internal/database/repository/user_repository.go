@@ -7,7 +7,7 @@ import (
 
 func GetAllUsers() ([]model.User, error) {
 	var users []model.User
-	_, err := database.SqlxDB.Query("select * from users", users)
+	err := database.SqlxDB.Select(&users, "select * from users")
 	if err != nil {
 		return nil, err
 	}

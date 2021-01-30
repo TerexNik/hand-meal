@@ -1,19 +1,20 @@
 package database
 
 import (
-	"database/sql"
 	"github.com/TerexNik/hand-meal/internal/config"
 	"github.com/jackc/pgx"
 	"github.com/jackc/pgx/stdlib"
+	"github.com/jmoiron/sqlx"
 	log "github.com/sirupsen/logrus"
 )
 
 var SqlxDB = createSqlxConnection()
 
-func createSqlxConnection() *sql.DB {
+func createSqlxConnection() *sqlx.DB {
 	var connPool = createConnectionPool()
 	// Then set up sqlx and return the created DB reference
-	return stdlib.OpenDBFromPool(connPool)
+	nativeDB := stdlib.OpenDBFromPool(connPool)
+	return sqlx.NewDb(nativeDB, "pgx")
 }
 
 func createConnectionPool() *pgx.ConnPool {
